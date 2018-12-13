@@ -1,29 +1,50 @@
-# sdutjd
+# 山东理工大学毕业生绩点查询专用方案
 
-## Project setup
-```
-yarn install
-```
+> 临近毕业，统计班里平均学分绩点达不到 70 分的同学，经常需要多处下载表格整理成绩表，造成很大的工作量，没办法在短时间内完成绩点计算，并且还有部分绩点达不到 70 分的同学不清楚自己的定位，故创建此项目，方便毕业生查询绩点，及时了解自己平均学分绩点具体数值。成绩来源于教务处，由另外一个同学模拟登陆完成，平均学分绩点查询方案稍后会更新。
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+项目采用前后端分离的方式，前端展示数据，后端提供数据接口，前后端结合共同实现需求。
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+**技术依托**
 
-### Run your tests
-```
-yarn run test
-```
+- vue
+- axios
+- webpack
+- laravel
+- python3
+- ...
 
-### Lints and fixes files
-```
-yarn run lint
+## 使用方式
+
+将代码下载到本地
+
+```bash
+$ git clone https://github.com/oxyzhg/sdut-bys.git
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+进入项目目录
+
+```bash
+$ cd sdut-bys
+```
+
+安装项目依赖
+
+```bash
+$ yarn
+```
+
+开启本地服务
+
+```bash
+$ yarn serve
+```
+
+可在项目中按需求修改内容
+
+修改完成后，打包应用
+
+```bash
+$ yarn build
+```
+
+将打包生成的 _dist_ 文件夹上传到服务器就可以了。
