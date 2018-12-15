@@ -1,8 +1,6 @@
 <template>
   <div>
-    <mu-chip class="user-avatar" color="blue300">
-      <mu-icon value="child_care"></mu-icon>食品1504，张强
-    </mu-chip>
+    <user-card></user-card>
     <mu-paper :z-depth="3">
       <mu-list>
         <mu-list-item button :ripple="true">
@@ -37,12 +35,29 @@
         </mu-list-item>
       </mu-list>
     </mu-paper>
+    <div class="declearation">
+      <p>计算公式</p>
+      <ul>
+        <li>平均学分绩点=(Σ课程成绩×课程学分)/Σ课程学分</li>
+      </ul>
+      <p>说明</p>
+      <ul>
+        <li>课程是指除公选课、辅修专业课程以外的主修课程；</li>
+        <li>缓考补考、重修按考试成绩计算，重修补考、补考按最高成绩计算。</li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import UserCard from '../components/UserCard.vue';
+
 export default {
-  name: 'SearchResult',
+  name: 'ScoreGpa',
+  components: {
+    UserCard
+  },
   async beforeRouteEnter(to, from, next) {
     console.log('beforeRouteEnter');
     next();
@@ -52,34 +67,51 @@ export default {
     this.$store.dispatch('getUserScore');
   },
   computed: {
-    scoreList() {
-      return this.$store.getters.scoreList;
-    },
-    averageGPA() {
-      return this.$store.getters.averageGPA;
-    },
-    totalOptionXf() {
-      return this.$store.getters.totalOptionXf;
-    },
-    totalCourse() {
-      return this.$store.getters.totalCourse;
-    },
-    failCourse() {
-      return this.$store.getters.failCourse;
+    ...mapGetters(['scoreList', 'averageGPA', 'totalOptionXf', 'totalCourse', 'failCourse'])
+  },
+  data() {
+    return {
+      loading: null
+    };
+  },
+  methods: {
+    fullscreen() {
+      this.loading = this.$loading();
+      setTimeout(() => {
+        this.loading().close();
+      }, 2000);
+    }
+  },
+  watch: {
+    scoreList: function() {
+      console.log(this.scoreList);
+      const loading = this.$loading();
+      if (this.scoreList.length) {
+        loading.close();
+      }
     }
   }
 };
 </script>
 
 <style lang="less">
-.user-avatar {
-  margin: 30px 50px;
-}
-.mu-table {
-  th,
-  td {
-    padding-left: 10px;
-    padding-right: 10px;
+.declearation {
+  margin-top: 20px;
+  p {
+    position: relative;
+    margin: 10px 10px 5px;
+    color: #424242;
+    font-weight: 600;
+    font-size: 12px;
+    text-indent: 1em;
+  }
+  ul {
+    margin: 0;
+  }
+  ul > li {
+    color: #9e9e9e;
+    font-size: 10px;
+    font-family: sans-serif;
   }
 }
 </style>

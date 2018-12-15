@@ -27,6 +27,15 @@ export default new Vuex.Store({
     allscore: []
   },
   getters: {
+    userinfo: state => {
+      if (state.allscore.length) {
+        return {
+          xh: state.allscore[0].xh,
+          xm: state.allscore[0].xm,
+          bj: state.allscore[0].bj
+        };
+      }
+    },
     scoreList: state => {
       return state.allscore.filter(el => el.kcbj === '主修');
     },
@@ -37,15 +46,14 @@ export default new Vuex.Store({
       return getters.scoreList.filter(el => el.kcxzdm === '03' && el.bfzcj >= '60');
     },
     filterMajorCourse: (state, getters) => {
-      let kch = []; // 课程编号数组
-      let course = []; // 课程详细数据数组
-      // 缓考、补考、重修，同一课程取最高成绩
+      let kch = [];
+      let course = [];
       getters.majorCourse
         .filter(el => el.cj !== '缓考')
         .forEach(item => {
           if (kch.includes(item.kch)) {
             const key = kch.indexOf(item.kch);
-            if (course[key].cj < item.cj) {
+            if (course[key].bfzcj < item.bfzcj) {
               course.splice(key, 1, item);
             }
           } else {
@@ -70,7 +78,7 @@ export default new Vuex.Store({
       return getters.filterMajorCourse.length;
     },
     failCourse: (state, getters) => {
-      return getters.majorCourse.filter(el => el.bfzcj < 60).length;
+      return getters.filterMajorCourse.filter(el => el.bfzcj < 60).length;
     }
   },
   mutations: {

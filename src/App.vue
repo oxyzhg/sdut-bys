@@ -1,31 +1,35 @@
 <template>
   <div id="app">
-    <base-layout>
+    <base-layout v-if="1">
       <template slot="header">
-        <div id="nav">
-          <router-link to="/">Home</router-link>|
-          <router-link to="/result">Result</router-link>|
-          <router-link to="/score">Score</router-link>
-        </div>
+        <h2 class="page__title">{{pageTitle}}</h2>
       </template>
       <template slot="main">
         <router-view/>
+        <bottom-navbar></bottom-navbar>
       </template>
     </base-layout>
+    <router-view v-else></router-view>
   </div>
 </template>
 
 <script>
-import BaseLayout from '@/components/BaseLayout.vue';
+import BaseLayout from '@/layouts/default/BaseLayout.vue';
+import BottomNavbar from '@/layouts/default/BottomNavbar.vue';
 
 export default {
   name: 'App',
   components: {
-    BaseLayout
+    BaseLayout,
+    BottomNavbar
+  },
+  computed: {
+    pageTitle() {
+      return this.$route.meta.title;
+    }
   }
 };
 </script>
-
 
 <style>
 #app {
@@ -33,18 +37,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  text-align: center;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

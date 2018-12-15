@@ -23,16 +23,15 @@ export default {
 };
 </script>
 
-
 <style>
 .page__hd {
-  margin-bottom: 20px;
+  margin: 30px 0;
 }
 .page__bd {
-  padding: 20px 0;
+  padding: 10px 0;
 }
 .page__ft {
-  margin: 10px 0;
+  margin: 10px 0 64px;
   color: #999;
   line-height: 1.5;
   font-size: 12px;

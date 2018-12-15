@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import SearchReault from './views/SearchResult.vue';
-import ScoreDataList from './views/ScoreDataList.vue';
+import ScoreGpa from './views/ScoreGpa.vue';
+import ScoreList from './views/ScoreList.vue';
 
 Vue.use(Router);
 
@@ -16,14 +16,20 @@ export default new Router({
       component: Home
     },
     {
-      path: '/result',
-      name: 'result',
-      component: SearchReault
+      path: '/gpa',
+      name: 'gpa',
+      meta: {
+        title: '平均学分绩点'
+      },
+      component: ScoreGpa
     },
     {
       path: '/score',
       name: 'score',
-      component: ScoreDataList
+      meta: {
+        title: '成绩表'
+      },
+      component: ScoreList
     },
     {
       path: '/about',
