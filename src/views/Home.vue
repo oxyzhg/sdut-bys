@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>绩点查询</h2>
+    <h2 class="page__title">绩点查询</h2>
     <search-box></search-box>
   </div>
 </template>

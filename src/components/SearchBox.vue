@@ -27,14 +27,14 @@ export default {
   data() {
     return {
       usernameRules: [
-        { validate: val => !!val, message: '必须填写用户名' },
-        { validate: val => val.length >= 3, message: '用户名长度大于3' }
+        { validate: val => !!val, message: '必须填写学号' },
+        { validate: val => val.length == 11, message: '学号长度为11位数字' }
       ],
       passwordRules: [
         { validate: val => !!val, message: '必须填写密码' },
         {
-          validate: val => val.length >= 3 && val.length <= 10,
-          message: '密码长度大于3小于10'
+          validate: val => val.length >= 6,
+          message: '密码长度不能小于6位'
         }
       ],
       validateForm: {
@@ -49,15 +49,8 @@ export default {
       this.$refs.form.validate().then(result => {
         console.log('form valid: ', result);
         if (result) {
-          console.log(this.validateForm);
-          const { username, password } = this.validateForm;
-          this.$router.push({
-            path: '/result',
-            query: {
-              username,
-              password
-            }
-          });
+          this.$store.dispatch('setCurrentUser', this.validateForm);
+          this.$router.push('/result');
         }
       });
     },
@@ -65,8 +58,7 @@ export default {
       this.$refs.form.clear();
       this.validateForm = {
         username: '',
-        password: '',
-        isAgree: false
+        password: ''
       };
     }
   },
@@ -80,7 +72,7 @@ export default {
 
 <style>
 .mu-demo-form {
-  width: 100%;
-  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 </style>
