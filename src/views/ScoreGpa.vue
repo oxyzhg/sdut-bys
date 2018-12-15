@@ -73,23 +73,6 @@ export default {
     return {
       loading: null
     };
-  },
-  methods: {
-    fullscreen() {
-      this.loading = this.$loading();
-      setTimeout(() => {
-        this.loading().close();
-      }, 2000);
-    }
-  },
-  watch: {
-    scoreList: function() {
-      console.log(this.scoreList);
-      const loading = this.$loading();
-      if (this.scoreList.length) {
-        loading.close();
-      }
-    }
   }
 };
 </script>

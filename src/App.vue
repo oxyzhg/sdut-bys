@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    <base-layout v-if="1">
+    <base-layout>
       <template slot="header">
         <h2 class="page__title">{{pageTitle}}</h2>
       </template>
       <template slot="main">
         <router-view/>
-        <bottom-navbar></bottom-navbar>
+        <bottom-navbar v-if="isAuth"></bottom-navbar>
       </template>
     </base-layout>
-    <router-view v-else></router-view>
   </div>
 </template>
 
@@ -26,6 +25,9 @@ export default {
   computed: {
     pageTitle() {
       return this.$route.meta.title;
+    },
+    isAuth() {
+      return this.$route.meta.isAuth;
     }
   }
 };

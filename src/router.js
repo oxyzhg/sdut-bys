@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Login from './views/Login.vue';
 import ScoreGpa from './views/ScoreGpa.vue';
 import ScoreList from './views/ScoreList.vue';
 
@@ -13,13 +13,26 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      redirect: {
+        name: 'login'
+      },
+      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      meta: {
+        title: '登录',
+        isAuth: false
+      },
+      component: Login
     },
     {
       path: '/gpa',
       name: 'gpa',
       meta: {
-        title: '平均学分绩点'
+        title: '平均学分绩点',
+        isAuth: true
       },
       component: ScoreGpa
     },
@@ -27,7 +40,8 @@ export default new Router({
       path: '/score',
       name: 'score',
       meta: {
-        title: '成绩表'
+        title: '成绩表',
+        isAuth: true
       },
       component: ScoreList
     },

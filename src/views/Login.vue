@@ -1,6 +1,6 @@
 <template>
   <mu-container>
-    <mu-form ref="form" :model="validateForm" class="mu-demo-form">
+    <mu-form ref="form" :model="validateForm" class="login-form">
       <mu-form-item label="学号" prop="username" :rules="usernameRules">
         <mu-text-field v-model="validateForm.username" prop="username"></mu-text-field>
       </mu-form-item>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'SearchBox',
+  name: 'Login',
   data() {
     return {
       usernameRules: [
@@ -71,9 +71,10 @@ export default {
 };
 </script>
 
-<style>
-.mu-demo-form {
-  margin: 0 auto;
+<style lang="less">
+.login-form {
+  margin: 64px auto;
   padding: 0 10px;
 }
 </style>
+

@@ -9,8 +9,8 @@ export default new Vuex.Store({
   state: {
     BASE_API: 'https://api.youthol.cn',
     currentUser: {
-      // username: '15110302127',
-      // password: 's9wmu102',
+      username: '15110302127',
+      password: 's9wmu102'
       // username: '15110302130',
       // password: '742682076waw',
       // username: '15110302129',
@@ -19,8 +19,8 @@ export default new Vuex.Store({
       // password: 'lzw15166931292',
       // username: '15110302141',
       // password: 'j12345',
-      username: '15110302131',
-      password: 'wicc1369050739',
+      // username: '15110302131',
+      // password: 'wicc1369050739',
       // username: '15110302124',
       // password: 'memory0825'
     },
@@ -112,7 +112,6 @@ export default new Vuex.Store({
               data = [...data, ...el.items];
             }
           });
-          // console.log(data)
           commit('setScoreList', data);
         })
         .catch(err => {
