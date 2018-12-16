@@ -97,14 +97,12 @@ export default new Vuex.Store({
         isauth: 0
       };
       const response = await fetchScore.list(params);
-      // TODO: 完善返回结果验证
-      let data = [];
-      response.data.forEach(el => {
-        if (el.items && el.items.length) {
-          data = [...data, ...el.items];
-        }
-      });
-      commit('setScoreList', data);
+      if (response.data === -1) {
+        console.log('密码不对');
+        commit('setCurrentUser', {});
+      } else {
+        commit('setScoreList', response.data.items);
+      }
     }
   }
 });

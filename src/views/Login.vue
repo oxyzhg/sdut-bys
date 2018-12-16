@@ -42,7 +42,7 @@ export default {
       visibility: false
     };
   },
-  created() {
+  mounted() {
     this.$store.dispatch('setCurrentUser');
   },
   methods: {
@@ -72,4 +72,3 @@ export default {
   padding: 0 10px;
 }
 </style>
-
