@@ -1,9 +1,8 @@
-import axios from 'axios';
-
-const { BASE_API } = this.$store.this.state;
+import http from '@/utils/http';
+import qs from 'qs';
 
 export default {
-  list: payload => {
-    return axios.post(`${BASE_API}/getkb/allscore`, payload);
+  list: (payload = {}) => {
+    return http.post('/getkb/allscore', qs.stringify(payload));
   }
 };

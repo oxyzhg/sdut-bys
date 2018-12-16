@@ -2,7 +2,9 @@
   <div id="app">
     <base-layout>
       <template slot="header">
-        <h2 class="page__title">{{pageTitle}}</h2>
+        <h2 class="page__title">
+          <span>{{pageTitle}}</span>
+        </h2>
       </template>
       <template slot="main">
         <router-view/>

@@ -1,5 +1,7 @@
 <template>
-  <span>© {{ currentYear }} 青春在线</span>
+  <mu-tooltip content="oxyzhg@163.com">
+    <span>© {{ currentYear }} 青春在线 kq</span>
+  </mu-tooltip>
 </template>
 
 <script>

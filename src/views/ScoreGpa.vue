@@ -51,28 +51,20 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import UserCard from '../components/UserCard.vue';
+import UserCard from '@/components/UserCard.vue';
 
 export default {
   name: 'ScoreGpa',
   components: {
     UserCard
   },
-  async beforeRouteEnter(to, from, next) {
-    console.log('beforeRouteEnter');
-    next();
+  computed: {
+    ...mapGetters(['isLogin', 'averageGPA', 'totalOptionXf', 'totalCourse', 'failCourse'])
   },
   created() {
-    console.log('开始请求数据');
-    this.$store.dispatch('getUserScore');
-  },
-  computed: {
-    ...mapGetters(['scoreList', 'averageGPA', 'totalOptionXf', 'totalCourse', 'failCourse'])
-  },
-  data() {
-    return {
-      loading: null
-    };
+    if (!this.isLogin) {
+      this.$router.push('/login')
+    }
   }
 };
 </script>

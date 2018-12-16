@@ -5238,11 +5238,6 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
-muse-ui-loading@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/muse-ui-loading/-/muse-ui-loading-0.2.0.tgz#a5ab50617b66314ef2490dc0703f694c255673ee"
-  integrity sha512-M0ASmwyeVELivBP/+mK63KMfvSvm9Ad9D85rKxqokvVCwmy+rghuL+wEP2NDG79oEE0UczgS69WSEtKTF+CO1g==
-
 muse-ui@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/muse-ui/-/muse-ui-3.0.1.tgz#6c22cc424f3573b7c8ddcc5a662d40f2e4c8caea"

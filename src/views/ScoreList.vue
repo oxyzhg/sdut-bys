@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      active: 0,
+      active: 1,
       sort: {
         name: '',
         order: 'asc'
@@ -125,26 +125,8 @@ export default {
       ]
     };
   },
-  created() {
-    console.log('开始请求数据');
-    this.$store.dispatch('getUserScore');
-  },
-  methods: {
-    handleSortChange({ name, order }) {
-      console.log(this.active);
-      if (this.active === 0) {
-        this.majorCourse = this.majorCourse.sort((a, b) =>
-          order === 'asc' ? a[name] - b[name] : b[name] - a[name]
-        );
-      } else {
-        this.optionCourse = this.optionCourse.sort((a, b) =>
-          order === 'asc' ? a[name] - b[name] : b[name] - a[name]
-        );
-      }
-    }
-  },
   computed: {
-    // ...mapGetters(['majorCourse', 'optionCourse']),
+    ...mapGetters(['isLogin']),
     majorCourse: {
       get() {
         return this.$store.getters.filterMajorCourse;
@@ -159,6 +141,25 @@ export default {
       },
       set(value) {
         return value;
+      }
+    }
+  },
+  created() {
+    if (!this.isLogin) {
+      this.$router.push('/login');
+    }
+  },
+  methods: {
+    handleSortChange({ name, order }) {
+      console.log(this.active);
+      if (this.active === 0) {
+        this.majorCourse = this.majorCourse.sort((a, b) =>
+          order === 'asc' ? a[name] - b[name] : b[name] - a[name]
+        );
+      } else {
+        this.optionCourse = this.optionCourse.sort((a, b) =>
+          order === 'asc' ? a[name] - b[name] : b[name] - a[name]
+        );
       }
     }
   }

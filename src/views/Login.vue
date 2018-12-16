@@ -27,15 +27,13 @@ export default {
   data() {
     return {
       usernameRules: [
-        { validate: val => !!val, message: '必须填写学号' },
-        { validate: val => val.length == 11, message: '学号长度为11位数字' }
+        { validate: val => !!val, message: '请填写学号' },
+        { validate: val => Number(val), message: '请输入数字学号' },
+        { validate: val => val.length == 11, message: '请确认学号是否正确' }
       ],
       passwordRules: [
-        { validate: val => !!val, message: '必须填写密码' },
-        {
-          validate: val => val.length >= 6,
-          message: '密码长度不能小于6位'
-        }
+        { validate: val => !!val, message: '请填写密码' },
+        { validate: val => val.length >= 6, message: '密码长度不能小于6位' }
       ],
       validateForm: {
         username: '',
@@ -44,16 +42,18 @@ export default {
       visibility: false
     };
   },
+  created() {
+    this.$store.dispatch('setCurrentUser');
+  },
   methods: {
     submit() {
       this.$refs.form.validate().then(result => {
-        console.log('form valid: ', result);
         if (result) {
           this.$store.dispatch('setCurrentUser', this.validateForm);
+          this.$store.dispatch('getUserScore', this.validateForm);
           this.$router.push('/gpa');
         }
       });
-      this.$router.push('/gpa');
     },
     clear() {
       this.$refs.form.clear();
@@ -61,11 +61,6 @@ export default {
         username: '',
         password: ''
       };
-    }
-  },
-  computed: {
-    toggleVisibility() {
-      return (this.visibility = !this.visibility);
     }
   }
 };

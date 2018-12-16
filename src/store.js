@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
-import qs from 'qs';
+import fetchScore from '@/api/score';
 
 Vue.use(Vuex);
 
@@ -9,24 +8,21 @@ export default new Vuex.Store({
   state: {
     BASE_API: 'https://api.youthol.cn',
     currentUser: {
-      username: '15110302127',
-      password: 's9wmu102'
+      // username: '15110302127',
+      // password: 's9wmu102'
       // username: '15110302130',
       // password: '742682076waw',
-      // username: '15110302129',
-      // password: 'wodengni0202AI',
       // username: '15110302122',
       // password: 'lzw15166931292',
-      // username: '15110302141',
-      // password: 'j12345',
       // username: '15110302131',
-      // password: 'wicc1369050739',
-      // username: '15110302124',
-      // password: 'memory0825'
+      // password: 'wicc1369050739'
     },
     allscore: []
   },
   getters: {
+    isLogin: state => {
+      return !!(state.currentUser.username && state.currentUser.password);
+    },
     userinfo: state => {
       if (state.allscore.length) {
         return {
@@ -90,33 +86,25 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setCurrentUser({ commit }, payload) {
-      commit('setCurrentUser', {
-        username: payload.username,
-        password: payload.password
-      });
+    setCurrentUser({ commit }, payload = {}) {
+      const { username, password } = payload;
+      commit('setCurrentUser', { username, password });
     },
-    getUserScore({ commit, state }) {
-      const { BASE_API, currentUser } = state;
-      const params = qs.stringify({
-        user: currentUser.username,
-        passwd: currentUser.password,
+    async getUserScore({ commit }, payload) {
+      const params = {
+        user: payload.username,
+        passwd: payload.password,
         isauth: 0
+      };
+      const response = await fetchScore.list(params);
+      // TODO: 完善返回结果验证
+      let data = [];
+      response.data.forEach(el => {
+        if (el.items && el.items.length) {
+          data = [...data, ...el.items];
+        }
       });
-      axios
-        .post(`${BASE_API}/getkb/allscore`, params)
-        .then(res => {
-          let data = [];
-          res.data.forEach(el => {
-            if (el.items && el.items.length) {
-              data = [...data, ...el.items];
-            }
-          });
-          commit('setScoreList', data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      commit('setScoreList', data);
     }
   }
 });
