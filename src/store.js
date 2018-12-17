@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import fetchScore from '@/api/score';
+import router from './router';
+import Toast from 'muse-ui-toast';
 
 Vue.use(Vuex);
 
@@ -91,6 +93,7 @@ export default new Vuex.Store({
       commit('setCurrentUser', { username, password });
     },
     async getUserScore({ commit }, payload) {
+      const { username, password } = payload;
       const params = {
         user: payload.username,
         passwd: payload.password,
@@ -98,10 +101,12 @@ export default new Vuex.Store({
       };
       const response = await fetchScore.list(params);
       if (response.data === -1) {
-        console.log('密码不对');
-        commit('setCurrentUser', {});
+        Toast.error('密码不正确！');
       } else {
+        commit('setCurrentUser', { username, password });
         commit('setScoreList', response.data.items);
+        Toast.success('登录成功！');
+        router.push('/gpa');
       }
     }
   }

@@ -62,7 +62,6 @@ export default {
     ...mapGetters(['isLogin', 'averageGPA', 'totalOptionXf', 'totalCourse', 'failCourse'])
   },
   created() {
-    console.log(this.isLogin);
     if (!this.isLogin) {
       this.$router.push('/login');
     }

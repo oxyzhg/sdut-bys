@@ -8,7 +8,7 @@
         <mu-text-field
           prop="password"
           v-model="validateForm.password"
-          :action-icon="visibility ? 'visibility_off' : 'visibility'"
+          :action-icon="visibility ? 'visibility' : 'visibility_off'"
           :action-click="() => (visibility = !visibility)"
           :type="visibility ? 'text' : 'password'"
         ></mu-text-field>
@@ -49,9 +49,7 @@ export default {
     submit() {
       this.$refs.form.validate().then(result => {
         if (result) {
-          this.$store.dispatch('setCurrentUser', this.validateForm);
           this.$store.dispatch('getUserScore', this.validateForm);
-          this.$router.push('/gpa');
         }
       });
     },
