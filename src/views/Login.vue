@@ -27,12 +27,12 @@ export default {
   data() {
     return {
       usernameRules: [
-        { validate: val => !!val, message: '请填写学号' },
+        { validate: val => !!val, message: '请输入学号' },
         { validate: val => Number(val), message: '请输入数字学号' },
         { validate: val => val.length == 11, message: '请确认学号是否正确' }
       ],
       passwordRules: [
-        { validate: val => !!val, message: '请填写密码' },
+        { validate: val => !!val, message: '请输入密码' },
         { validate: val => val.length >= 6, message: '密码长度不能小于6位' }
       ],
       validateForm: {
