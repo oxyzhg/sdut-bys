@@ -173,6 +173,10 @@ export default {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .mu-table-header,
+  .mu-table-body {
+    margin: 0 auto;
+  }
   .red500 {
     color: #f44336;
   }
