@@ -9,16 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     BASE_API: 'https://api.youthol.cn',
-    currentUser: {
-      // username: '15110302127',
-      // password: 's9wmu102'
-      // username: '15110302130',
-      // password: '742682076waw',
-      // username: '15110302122',
-      // password: 'lzw15166931292',
-      // username: '15110302131',
-      // password: 'wicc1369050739'
-    },
+    currentUser: {},
     allscore: []
   },
   getters: {
