@@ -45,7 +45,7 @@ const errorHandle = (status, message) => {
 
 const instance = axios.create();
 
-instance.defaults.baseURL = 'https://api.youthol.cn';
+instance.defaults.baseURL = 'https://youthapi.sdut.edu.cn';
 instance.defaults.timeout = 3000;
 instance.defaults.withCredentials = true;
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';

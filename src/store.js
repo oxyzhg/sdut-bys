@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    BASE_API: 'https://api.youthol.cn',
+    BASE_API: 'https://youthapi.sdut.edu.cn',
     currentUser: {},
     allscore: []
   },
